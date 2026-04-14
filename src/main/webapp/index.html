@@ -2,12 +2,311 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web App Coursework Hub</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f4efe7;
+            --bg-deep: #e8dcc8;
+            --panel: rgba(255, 252, 247, 0.8);
+            --panel-strong: #fffaf2;
+            --line: rgba(116, 82, 48, 0.16);
+            --text: #2d2118;
+            --muted: #735d4a;
+            --accent: #b45309;
+            --accent-strong: #7c2d12;
+            --shadow: 0 24px 60px rgba(72, 45, 22, 0.14);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Georgia, "Times New Roman", serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(255, 244, 214, 0.9), transparent 34%),
+                radial-gradient(circle at bottom right, rgba(194, 120, 58, 0.18), transparent 28%),
+                linear-gradient(135deg, var(--bg) 0%, #f8f4ed 48%, var(--bg-deep) 100%);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+            padding: 40px 0 56px;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 40px;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(255, 250, 242, 0.92), rgba(248, 238, 225, 0.78));
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            right: -80px;
+            top: -80px;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(180, 83, 9, 0.18), rgba(180, 83, 9, 0));
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(180, 83, 9, 0.1);
+            color: var(--accent-strong);
+            font: 700 13px/1.1 Arial, sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 720px;
+            margin: 18px 0 14px;
+            font-size: clamp(2.5rem, 4vw, 4.8rem);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+        }
+
+        .hero p {
+            max-width: 620px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.08rem;
+            line-height: 1.7;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .meta-chip {
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.56);
+            font: 600 0.95rem/1 Arial, sans-serif;
+            color: var(--muted);
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin: 36px 0 18px;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .section-head p {
+            max-width: 520px;
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .card {
+            display: block;
+            position: relative;
+            min-height: 220px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+            box-shadow: 0 16px 40px rgba(72, 45, 22, 0.08);
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+        }
+
+        .card:hover,
+        .card:focus-visible {
+            transform: translateY(-6px);
+            border-color: rgba(180, 83, 9, 0.28);
+            box-shadow: 0 22px 44px rgba(72, 45, 22, 0.14);
+            outline: none;
+        }
+
+        .card-number {
+            display: inline-flex;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: #2d2118;
+            color: #fff7ed;
+            font: 700 1rem/1 Arial, sans-serif;
+        }
+
+        .card h3 {
+            margin: 18px 0 10px;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            margin: 0 0 18px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(180, 83, 9, 0.1);
+            color: var(--accent-strong);
+            font: 700 0.78rem/1 Arial, sans-serif;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .arrow {
+            position: absolute;
+            right: 22px;
+            bottom: 22px;
+            font-size: 1.6rem;
+            color: var(--accent);
+        }
+
+        .footer-note {
+            margin-top: 20px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--accent);
+            border-radius: 14px;
+            background: rgba(255, 250, 242, 0.75);
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        @media (max-width: 720px) {
+            .page {
+                width: min(100% - 20px, 1120px);
+                padding-top: 20px;
+            }
+
+            .hero {
+                padding: 28px 22px;
+                border-radius: 22px;
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .card {
+                min-height: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-<a href="week1.jsp">week1</a>
-<a href="week2_table.jsp">week2_table</a>
-<a href="week2_frame.jsp">week2_frame</a>
-<a href="week3.jsp">week3</a>
+<main class="page">
+    <section class="hero">
+        <div class="eyebrow">Course Portal</div>
+        <h1>Web Application Exercises, framed like a real project home.</h1>
+        <p>
+            Use this page as the main entry point for each weekly task. The layout turns a plain file list into a cleaner
+            dashboard with stronger hierarchy, clearer labels, and better spacing across desktop and mobile screens.
+        </p>
+        <div class="hero-meta">
+            <div class="meta-chip">JSP Practice</div>
+            <div class="meta-chip">Tables and Frames</div>
+            <div class="meta-chip">AJAX and JSON</div>
+        </div>
+    </section>
+
+    <div class="section-head">
+        <h2>Assignment Index</h2>
+        <p>Select a page below to open the corresponding exercise. Each card is styled to read more like a module than a raw hyperlink.</p>
+    </div>
+
+    <section class="grid">
+        <a class="card" href="week1.jsp">
+            <span class="card-number">01</span>
+            <h3>Week 1</h3>
+            <p>Basic JSP output and the introductory servlet link.</p>
+            <div class="tag-row">
+                <span class="tag">JSP</span>
+                <span class="tag">Intro</span>
+            </div>
+            <span class="arrow">→</span>
+        </a>
+
+        <a class="card" href="week2_table.jsp">
+            <span class="card-number">02</span>
+            <h3>Week 2 Table</h3>
+            <p>Structured table-based layout practice with a cleaner access point from the homepage.</p>
+            <div class="tag-row">
+                <span class="tag">Layout</span>
+                <span class="tag">Table</span>
+            </div>
+            <span class="arrow">→</span>
+        </a>
+
+        <a class="card" href="week2_frame.jsp">
+            <span class="card-number">02</span>
+            <h3>Week 2 Frame</h3>
+            <p>Frame-oriented exercise grouped with the other second-week work, but given its own visual slot.</p>
+            <div class="tag-row">
+                <span class="tag">Frames</span>
+                <span class="tag">Classic HTML</span>
+            </div>
+            <span class="arrow">→</span>
+        </a>
+
+        <a class="card" href="week3.jsp">
+            <span class="card-number">03</span>
+            <h3>Week 3</h3>
+            <p>AJAX and JSON interaction page with a more advanced interface and backend integration.</p>
+            <div class="tag-row">
+                <span class="tag">AJAX</span>
+                <span class="tag">JSON</span>
+            </div>
+            <span class="arrow">→</span>
+        </a>
+    </section>
+
+    <div class="footer-note">
+        Tip: if you want this landing page to match the visual style of the weekly JSP pages even more closely, the next step would be to align fonts and color variables across all pages instead of styling only the index.
+    </div>
+</main>
 </body>
 </html>
