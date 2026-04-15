@@ -1,0 +1,17 @@
+{
+  "course": "Web应用开发",
+  "week": 4,
+  "topic": "文件上传下载",
+  "student": {
+    "id": "20260004",
+    "name": "王五",
+    "role": "资料员"
+  },
+  "tasks": [
+    "multipart 分段观察",
+    "XMLHttpRequest 单文件上传",
+    "jQuery 多文件异步上传",
+    "Servlet 流式下载"
+  ],
+  "status": "ready-for-upload-test"
+}
