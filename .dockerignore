@@ -1,0 +1,9 @@
+.git
+.idea
+.vscode
+target
+out
+*.iml
+*.log
+.DS_Store
+sample-files
