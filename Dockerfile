@@ -7,7 +7,7 @@ COPY .mvn .mvn
 RUN chmod +x mvnw
 
 COPY src src
-RUN ./mvnw -DskipTests clean package
+RUN mvn -DskipTests clean package
 
 FROM tomcat:10.1-jdk17-temurin
 
