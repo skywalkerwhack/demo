@@ -25,7 +25,7 @@ fi
 echo "Starting container: $CONTAINER_NAME"
 docker run -d \
     --name "$CONTAINER_NAME" \
-    -p "$HOST_PORT:$CONTAINER_PORT" \
+    -p "127.0.0.1:$HOST_PORT:$CONTAINER_PORT" \
     "$IMAGE_NAME"
 
 echo
